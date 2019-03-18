@@ -43,7 +43,7 @@ class EchoBot(Client):
             except:
                 client.send(Message(text='An error has occured! :('), thread_id=thread_id,
                             thread_type=thread_type)
-
+        
         always_true = True
 
         # if thread_type != ThreadType.GROUP:
@@ -164,6 +164,10 @@ class EchoBot(Client):
             odpowiedz(random_color, random_emoji)
         """
 
+with open("../login.txt", 'r') as file:
+        lines = file.readlines()
+        email = lines[0]
+        password = lines[1]
 
-client = EchoBot("#", "#")
+client = EchoBot(email, password)
 client.listen()
