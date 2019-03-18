@@ -205,7 +205,7 @@ class Bot(Client):
             self.sendRemoteImage(zadymiarnia['szef'], thread_id=info['thread_id'], thread_type=info['thread_type'])
 
         elif args[0] == 'rafon':
-            self.sendRemoteImage(zadymiarnia['rafon'], thread_id=info['thread_id'], )
+            self.sendRemoteImage(zadymiarnia['rafon'], thread_id=info['thread_id'], thread_type=info['thread_type'] )
         elif args[0] == 'blowjob':
             self.sendRemoteImage(zadymiarnia['blow'], thread_id=info['thread_id'], thread_type=info['thread_type'])
         else:
