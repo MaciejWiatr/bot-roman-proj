@@ -83,6 +83,9 @@ class EchoBot(Client):
                     else:
                         simple_calc()
 
+                elif "!blowjob" in messagetext:
+                    client.sendLocalImage('blow.jpg', thread_id=thread_id, thread_type=thread_type)
+
                 elif "!help" in messagetext:
                     client.send(Message(
                         text='''
@@ -112,29 +115,26 @@ class EchoBot(Client):
 
                 elif "!coto"  in messagetext:
                     try:
-                        searching_for = messagetext[5:]
+                        messagetext_origin = message_object.text
+                        searching_for = messagetext_origin[5:]
                         wikipedia.set_lang("pl")
                         try:
                             wiki = wikipedia.summary(searching_for)
                             client.send(Message(text='📖Według wikipedii📖{} to:\n{}...'.format(searching_for,wiki[:400])), thread_id=thread_id,thread_type=thread_type)
                         except:
-                            try:
-                                wikipedia.set_lang("en")
-                                wiki = wikipedia.summary(searching_for)
-                            except:
-                                wikipedia.set_lang("pl")
-                                list_wiki = wikipedia.search(searching_for)
-                                wikipedia.set_lang("en")
-                                list_wiki_en = wikipedia.search(searching_for)
-                                final_result = []
+                            wikipedia.set_lang("pl")
+                            list_wiki = wikipedia.search(searching_for)
+                            wikipedia.set_lang("en")
+                            list_wiki_en = wikipedia.search(searching_for)
+                            final_result = []
 
-                                if len(list_wiki) != (0 or []):
-                                    final_result += list_wiki
+                            if len(list_wiki) != (0 or []):
+                                final_result += list_wiki
 
-                                if len(list_wiki_en) != (0 or []):
-                                    final_result += list_wiki_en
+                            if len(list_wiki_en) != (0 or []):
+                                final_result += list_wiki_en
 
-                                client.send(Message(text='Nie mogłem znaleźć definicji dla {} :/\nmoże chodziło ci o któreś z poniższych?\n{}'.format(searching_for, final_result)),thread_id=thread_id,thread_type=thread_type)
+                            client.send(Message(text='Nie mogłem znaleźć definicji dla {} :/\nmoże chodziło ci o któreś z poniższych?\n{}'.format(searching_for, final_result)),thread_id=thread_id,thread_type=thread_type)
                     except:
                         client.send(Message(text='An error has occured! :('), thread_id=thread_id,
                                     thread_type=thread_type)
