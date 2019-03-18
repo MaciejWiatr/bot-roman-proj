@@ -109,10 +109,11 @@ class Bot(Client):
                               thread_id=info['thread_id'],
                               thread_type=info['thread_type'])
                 except:
-                    wiki_result = wikipedia.search(search_text)  # wikipedia list output
+                    wiki_list_search = wikipedia.search(search_text)					# wikipedia list output
+					wiki_list_result = "\n".join(wiki_list_search)
                     self.send(Message(
                         text="Nie mogłem znaleźć pasującej definicji {} :/ podobne wyszukiwania:\n{}".format(
-                            search_text, wiki_result)), thread_id=info['thread_id'],
+                            search_text, wiki_list_result)), thread_id=info['thread_id'],
                               thread_type=info['thread_type'])
             except Exception:
                 traceback.print_exc()
