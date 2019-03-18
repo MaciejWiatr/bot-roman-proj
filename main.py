@@ -68,7 +68,6 @@ class Bot(Client):
             else:  #
                 self.command_unrecognized(message_info)  # if not, call command_unrecognized()
 
-
     # Command syntax rules
     #
     # 1. Every command must have exactly two arguments except of self:
@@ -96,27 +95,42 @@ class Bot(Client):
             self.command_list[args[0]](['help'])  # run that command with help as a first argument
 
     def command_wiki(self, args, info):
-        if args[0] == "help":
-            self.send(Message(text=self.help_text['wiki']), thread_id=info['thread_id'],
-                      thread_type=info['thread_type'])
-        else:
-            search_text = ' '.join(args)
-            wikipedia.set_lang('pl')
-            try:
+
+            if args[0] == "help":
+                self.send(Message(text=self.help_text['wiki']), thread_id=info['thread_id'],
+                          thread_type=info['thread_type'])
+            else:
+                search_text = ' '.join(args)
+                wikipedia.set_lang('pl')
+                """
                 try:
-                    wiki_result = wikipedia.summary(search_text)  # wikipedia definition
+                    try:
+                        wiki_result = wikipedia.summary(search_text)  # wikipedia definition
                     self.send(Message(text="Definicja {} :\n{}".format(search_text, wiki_result)),
                               thread_id=info['thread_id'],
                               thread_type=info['thread_type'])
-                except:
-                    wiki_list_search = wikipedia.search(search_text)					# wikipedia list output
-					wiki_list_result = "\n".join(wiki_list_search)
+                    except:
+                        wiki_list_search = wikipedia.search(search_text)  # wikipedia list output
+                        wiki_list_result = "\n".join(wiki_list_search)
                     self.send(Message(
                         text="Nie mogłem znaleźć pasującej definicji {} :/ podobne wyszukiwania:\n{}".format(
-                            search_text, wiki_list_result)), thread_id=info['thread_id'],
-                              thread_type=info['thread_type'])
-            except Exception:
-                traceback.print_exc()
+                            search_text, wiki_list_result)), thread_id=info['thread_id'], thread_type=info['thread_type'])
+                except Exception:
+                        traceback.print_exc()
+                """
+                try:
+                    try:
+                        wiki_result = wikipedia.summary(search_text)
+                        self.send(Message(text="Definicja {}:\n{}".format(search_text,wiki_result)),thread_id=info['thread_id'], thread_type=info['thread_type'])
+                    except:
+                        wiki_list_search = wikipedia.search(search_text)
+                        wiki_list_result = "\n".join(wiki_list_search)
+                        self.send(Message(text="Nie mogłem znaleźć pasującej definicji {} :/ podobne wyszukiwania:\n{}".format(search_text, wiki_list_result)),thread_id=info['thread_id'], thread_type=info['thread_type'])
+                except Exception:
+                    traceback.print_exc()
+
+
+
 
     def command_dance(self, args, info):
         if args[0] == "help":
@@ -136,6 +150,7 @@ class Bot(Client):
             except:
                 traceback.print_exc()
                 pass
+
 
     def command_weeb(self, args, info):
         if args[0] == "help":
@@ -157,6 +172,7 @@ class Bot(Client):
                 traceback.print_exc()
                 pass
 
+
     def command_change(self, args, info):
         if args[0] == "help":
             self.send(Message(
@@ -175,6 +191,7 @@ class Bot(Client):
             except Exception:
                 traceback.print_exc()
                 pass
+
 
     def command_zadymiarnia(self, args, info):
         if args[0] == "help":
@@ -195,6 +212,7 @@ class Bot(Client):
             self.sendRemoteImage(random.choice(zadymiarnia), thread_id=info['thread_id'],
                                  thread_type=info['thread_type'])
 
+
     def command_calc(self, args, info):
         if args[0] == "help":
             self.send(Message(
@@ -203,7 +221,7 @@ class Bot(Client):
                 thread_type=info['thread_type'])
         else:
             to_calc = ''.join(args)
-            print("To calc is "+to_calc)
+            print("To calc is " + to_calc)
             if "**" in to_calc:
                 check = to_calc.split("**")[1]
                 if eval(check) >= 1000:
@@ -218,16 +236,17 @@ class Bot(Client):
                           thread_id=info['thread_id'],
                           thread_type=info['thread_type'])
 
+
     def command_unrecognized(self, info):
         self.send(Message(text="Nie znam takiej komendy!"), thread_id=info['thread_id'],
                   thread_type=info['thread_type'])
 
 
-if __name__=="__main__":
-    with open("login.txt", 'r') as file: #change this part as you desire
-       lines = file.readlines()            #
-       email = lines[0]                    #
-       password = lines[1]                 #
+if __name__ == "__main__":
+    with open("login.txt", 'r') as file:  # change this part as you desire
+        lines = file.readlines()  #
+        email = lines[0]  #
+        password = lines[1]  #
 
 bot = Bot(email, password)
 bot.listen()
