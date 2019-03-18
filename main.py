@@ -100,7 +100,7 @@ class Bot(Client):
             self.send(Message(text=self.help_text['wiki']), thread_id=info['thread_id'],
                       thread_type=info['thread_type'])
         else:
-            search_text = ''.join(args)
+            search_text = ' '.join(args)
             wikipedia.set_lang('pl')
             try:
                 try:
@@ -109,7 +109,7 @@ class Bot(Client):
                               thread_id=info['thread_id'],
                               thread_type=info['thread_type'])
                 except:
-                    wikipedia.search(search_text)  # wikipedia list output
+                    wiki_result = wikipedia.search(search_text)  # wikipedia list output
                     self.send(Message(
                         text="Nie mogłem znaleźć pasującej definicji {} :/ podobne wyszukiwania:\n{}".format(
                             search_text, wiki_result)), thread_id=info['thread_id'],
@@ -223,10 +223,10 @@ class Bot(Client):
 
 
 if __name__=="__main__":
-    with open("../login.txt", 'r') as file: #change this part as you desire
+    with open("login.txt", 'r') as file: #change this part as you desire
        lines = file.readlines()            #
        email = lines[0]                    #
        password = lines[1]                 #
 
-bot = Bot('kubax654@gmail.com', 'FurryBot69')
+bot = Bot(email, password)
 bot.listen()
