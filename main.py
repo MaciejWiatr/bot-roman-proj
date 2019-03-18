@@ -221,11 +221,11 @@ class Bot(Client):
                   thread_type=info['thread_type'])
 
 
-# if __name__=="__main__":
-#    with open("../login.txt", 'r') as file: #change this part as you desire
-#       lines = file.readlines()            #
-#        email = lines[0]                    #
-#        password = lines[1]                 #
+if __name__=="__main__":
+    with open("../login.txt", 'r') as file: #change this part as you desire
+       lines = file.readlines()            #
+       email = lines[0]                    #
+       password = lines[1]                 #
 
-bot = Bot('backupmwiatr@gmail.com', 'JestemBotem12')
+bot = Bot('email', 'password')
 bot.listen()
