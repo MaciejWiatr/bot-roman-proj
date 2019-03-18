@@ -92,7 +92,7 @@ class Bot(Client):
 
     def command_help(self, args, info):
         if args[0] in self.command_list:  # if the first argument of !help is a command name
-            self.command_list[args[0]](['help'])  # run that command with help as a first argument
+            self.command_list[args[0]](['help'],info)  # run that command with help as a first argument
 
     def command_wiki(self, args, info):
 
