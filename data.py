@@ -25,6 +25,13 @@ anime_gifs = [
               "https://i.imgur.com/s7MUhRa.gif",
               "https://i.imgur.com/LeBzqbC.gif",
               "https://i.imgur.com/DCdyaHd.gif"
-
-
              ]
+anime_nsfw = [
+             "https://i.imgur.com/k5cZqo8.png"
+             ]
+zadymiarnia = {
+    'head': "https://i.imgur.com/mNufVvy.jpg",
+    'szef': "https://i.imgur.com/6UKB7kF.jpg",
+    'rafon': "https://i.imgur.com/PvqkiyL.gif",
+    'blow': "https://i.imgur.com/bzFipmO.jpg"
+}
