@@ -165,5 +165,5 @@ class EchoBot(Client):
         """
 
 
-client = EchoBot("backupmwiatr@gmail.com", "JestemBotem12")
+client = EchoBot("#", "#")
 client.listen()
