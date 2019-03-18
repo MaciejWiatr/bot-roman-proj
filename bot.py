@@ -37,7 +37,8 @@ class Bot(Client):
             self.command_list[args[0]](['help'])
 
     def command_unrecognized(self):
-        self.send(Message(text="Nie znam takiej komendy!"), thread_id=thread_id, thread_type=thread_type))
+        self.send(Message(text="Nie znam takiej komendy!"), thread_id=thread_id, thread_type=thread_type)
+
 if __name__=="__main__":
     with open("../login.txt", 'r') as file:
         lines = file.readlines()
