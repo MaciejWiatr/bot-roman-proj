@@ -55,7 +55,10 @@ class Bot(Client):
         if author_id != self.uid and re.search('^!', message_text):  # if the message begins with an '!'
             message_components = re.findall(r'[\w,]+', message_text)  # split up the message
             command = message_components[0]  # first part of the message is the command
-            arguments = [i for i in message_components[1:]]  # the rest are the arguments
+            if command == 'calc':
+                arguments = re.findall(r'[0-9]+|[\*\/\+\-]+', message_text)
+            else:
+                arguments = [i for i in message_components[1:]]  # the rest are the arguments
             if arguments == []:
                 arguments.append(True)
 
@@ -65,10 +68,6 @@ class Bot(Client):
             else:  #
                 self.command_unrecognized(message_info)  # if not, call command_unrecognized()
 
-            if command == 'calc':
-                arguments = [message_text]
-            else:
-                arguments = [i for i in message_components[1:]]
 
     # Command syntax rules
     #
@@ -202,7 +201,8 @@ class Bot(Client):
                 thread_id=info['thread_id'],
                 thread_type=info['thread_type'])
         else:
-            to_calc = args[0]
+            to_calc = ''.join(args)
+            print("To calc is "+to_calc)
             if "**" in to_calc:
                 check = to_calc.split("**")[1]
                 if eval(check) >= 1000:
